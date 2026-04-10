@@ -68,7 +68,7 @@ mos2-memristor-ml/
 │   └── figures/
 │       ├── fig_s1_layer_distribution.png
 │       ├── fig_s2_iv_curves.png
-│       ├── fig_s3_correlation_heatmap.png
+│       ├── fig_s3_correlation.png
 │       ├── fig_s4_data_quality.png
 │       ├── 03_chip_ion_boxplot.png
 │       ├── 03_run_ion_trend.png
@@ -136,7 +136,7 @@ Raw CSV files (Keithley 2634B measurements)
 > Log-scale IV curves for Run 33 (negative voltage) and Run 35 (positive voltage). SET and RESET voltages marked. Classic bipolar memristive hysteresis visible in Run 35.
 
 ### Correlation Heatmap
-![Correlation Heatmap](notebooks/fig_s3_correlation_heatmap.png)
+![Correlation Heatmap](notebooks/fig_s3_correlation.png)
 > Feature correlation matrix for layer_sweep data. Strong i_on ↔ on/off ratio correlation (r=0.96) is a noise floor artifact, not a physical relationship.
 
 ### Chip-level ON-state Current Distribution
