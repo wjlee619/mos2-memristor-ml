@@ -3,7 +3,7 @@
 > Machine learning analysis of MoS₂/Graphene printed memristor devices — feature extraction, EDA, and ON-state stability study.
 
 **Imperial College London MRes Research Project**
-*Won Jun Lee (이원준) · 2024–2025*
+*Won Jun Lee (이원준) · 2023–2024*
 
 ---
 
