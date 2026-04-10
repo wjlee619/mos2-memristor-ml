@@ -7,13 +7,11 @@
 
 ---
 
-## About
+## Project overview
 
 This project takes raw electrical measurement data from MoS₂-based memristor devices and turns it into machine learning-ready features. The goal was to find out whether **layer count** and **measurement conditions** can predict device performance.
 
 **Short answer:** Layer count alone cannot predict switching performance. But repeated measurements reveal a clear **electroforming effect** — devices get better the more you use them.
-
-ML analysis of MoS₂/Graphene printed memristors — feature extraction, EDA, Random Forest, and ON-state stability study. Electroforming effect confirmed (R²=0.48, p<0.001).
 
 ---
 
