@@ -128,15 +128,15 @@ Raw CSV files (Keithley 2634B measurements)
 ## Key Figures
 
 ### Layer Distribution & ON/OFF Ratio
-![Layer Distribution](results/figures/fig_s1_layer_distribution.png)
+![Layer Distribution](notebooks/fig_s1_layer_distribution.png)
 > Boxplot of on/off ratio across 6 layer groups (10–60 layers). No clear monotonic trend — layer count alone does not predict switching performance.
 
 ### IV Curves — SET and RESET Detection
-![IV Curves](results/figures/fig_s2_iv_curves.png)
+![IV Curves](notebooks/fig_s2_iv_curves.png)
 > Log-scale IV curves for Run 33 (negative voltage) and Run 35 (positive voltage). SET and RESET voltages marked. Classic bipolar memristive hysteresis visible in Run 35.
 
 ### Correlation Heatmap
-![Correlation Heatmap](results/figures/fig_s3_correlation_heatmap.png)
+![Correlation Heatmap](notebooks/fig_s3_correlation_heatmap.png)
 > Feature correlation matrix for layer_sweep data. Strong i_on ↔ on/off ratio correlation (r=0.96) is a noise floor artifact, not a physical relationship.
 
 ### Chip-level ON-state Current Distribution
