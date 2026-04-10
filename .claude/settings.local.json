@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/usr/bin/python3 --version)",
+      "Bash(/opt/homebrew/bin/python3 --version)",
+      "Bash(/opt/homebrew/bin/python3:*)",
+      "Bash(/opt/homebrew/bin/python3.12:*)",
+      "Bash(awk 'NR>62')",
+      "Bash(awk -F',' 'NR==1000 || NR==1500 || NR==2000 || NR==2500 || NR==3000 || NR==3500 || NR==3999')",
+      "Bash(python scripts/extract_memeffect_iv.py)",
+      "Bash(python3 scripts/extract_memeffect_iv.py)",
+      "Bash(/opt/homebrew/bin/pip3.12 install:*)",
+      "Bash(/opt/homebrew/bin/jupyter nbconvert:*)",
+      "Bash(python3.12 -c ':*)",
+      "Bash(python3 -c ':*)",
+      "Bash(ls /Users/wonjunlee/Desktop/mos2-memristor-ml/results/figures/03_*)"
+    ]
+  }
+}
