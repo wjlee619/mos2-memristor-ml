@@ -180,30 +180,6 @@ reset_idx = np.argmin(grad_smooth)
 
 ---
 
-## How to Run
-
-```bash
-# 1. Install dependencies
-/opt/homebrew/bin/pip3.12 install pandas numpy matplotlib seaborn scikit-learn \
-    scipy nbformat nbconvert jupyter --break-system-packages
-
-# 2. Extract features (assumes raw data in ~/Desktop/Imperial/...)
-python3.12 scripts/process_layer_sweep.py
-python3.12 scripts/extract_memeffect_iv.py
-
-# 3. Build and run notebooks
-python3.12 scripts/build_eda_notebook.py
-jupyter nbconvert --to notebook --execute notebooks/01_eda.ipynb
-
-python3.12 scripts/build_rf_notebook.py
-jupyter nbconvert --to notebook --execute notebooks/02_random_forest.ipynb
-
-python3.12 scripts/build_stability_notebook.py
-jupyter nbconvert --to notebook --execute notebooks/03_stability_analysis.ipynb
-```
-
-> **Note:** Raw measurement data is not included in this repository (private experimental data). Processed CSV files in `data/processed/` are provided.
-
 ---
 
 ## Data Description
@@ -235,7 +211,7 @@ jupyter nbconvert --to notebook --execute notebooks/03_stability_analysis.ipynb
 
 MoS₂ (molybdenum disulfide) is a 2D transition metal dichalcogenide semiconductor. When incorporated into a printed memristor device with graphene electrodes, it shows resistive switching behaviour suitable for neuromorphic computing applications.
 
-This dataset was collected during MRes research at Imperial College London (2024) using a Keithley 2634B SourceMeter.
+This dataset was collected during MRes research at **Imperial College London (2024)** in the **2DWeb group, Felice Torrisi Lab** (MSRH building), using a Keithley 2634B SourceMeter. Measurements were conducted in collaboration with PhD researcher **Shanglong (2024)**.
 
 ---
 
