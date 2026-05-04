@@ -47,3 +47,30 @@ mean-only view vs full distribution view.
 
 **Output:** results/figures/05_mean_bar.png,
 05_distribution_grid.png, 05_mean_vs_distribution.png
+
+---
+## Notebook 06 — Drill-Down Root Cause Analysis
+
+**Problem:** 6 um electrode devices split into switching (~23) and
+non-switching (~12) populations. Notebook 05 showed this; Notebook 06
+investigates why.
+
+**Approach:** Drill down through T-code (channel length) and chip position
+(column index). Parse T-code from filename. Build yield table per
+variable. Visualise with grouped bar chart and 2D position heatmap.
+
+**Findings:**
+- T24 (long channel): 10% switching yield (1/10 devices)
+- T12 (short channel): 88% switching yield (22/25 devices)
+- Column 1 (FC1): 9% yield. Column 4 (FC4): 92% yield.
+- CONFOUNDED: all T24 measurements are at column 1. No crossover
+  condition exists in this dataset.
+- One T12 device at column 1 also failed (n=1, weak evidence for
+  position effect independent of T-code).
+- Root cause cannot be determined from existing data.
+
+**Next experiment:** Measure FC4-T24 and FC1-T12 (multiple runs) to
+break the T-code/position confound.
+
+**Output:** results/figures/06_tcode_switching.png,
+06_position_switching_map.png, 06_drilldown_summary.png

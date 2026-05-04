@@ -34,3 +34,27 @@ In a real fab, if I reported "6 um electrode devices have mean i_on of
 showed them the bimodal distribution, they would immediately ask "what is
 different about the devices in the lower population?" That question leads
 to a root cause. The mean never gets you there.
+
+---
+## What I learned — Notebook 06
+
+I went in thinking spray coating non-uniformity would be the answer.
+Column 1 vs column 4 looked spatial, and I had a mental model of the
+zigzag pattern leaving thin edges. But when I looked at the T-code
+breakdown first, T24 had 90% failure vs T12 at 12%. That looked like
+channel length was the culprit.
+
+Then I realised: every T24 measurement happens to be at column 1.
+Every column 4 measurement uses T12. The experiment was never designed
+to separate these two variables. I can’t root-cause it.
+
+This is what a confounded experiment looks like in real data. Both
+hypotheses fit the numbers perfectly. The only way out is to run the
+deconfounding experiment deliberately: measure T24 at column 4, and
+T12 at column 1 with enough repeats.
+
+The most useful thing I found: one T12 device at column 1 (FC1-T12,
+Run 45) also failed. That’s a single data point, but it hints that
+position might matter independently of T-code. If I had to bet, I’d
+run FC1-T12 first — if it still fails, the spray coating hypothesis
+survives. If it switches, T-code is the dominant factor.
