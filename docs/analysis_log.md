@@ -25,3 +25,25 @@ defects prevent reliable filament formation.
 
 **Output:** results/figures/04_electrode_width_ion.png,
 results/figures/04_spatial_map.png
+
+---
+## Notebook 05 — Why Aggregate Statistics Hide Device Failures
+
+**Problem:** Aggregate i_on statistics across electrode widths appear to
+show a smooth monotonic trend. This obscures three fundamentally different
+device populations.
+
+**Approach:** Full distribution analysis per electrode width group using
+violin plots (KDE in log space) and strip plots overlaid. Comparison of
+mean-only view vs full distribution view.
+
+**Findings:**
+- 18 um/12 um: tight mA-range, consistent switching
+- 6 um: bimodal — ~25% at pA (leakage), ~75% at mA. Mean of 2.22 mA
+  represents neither population accurately.
+- 2 um: exclusively pA (leakage). Not low performance — a different
+  physical state entirely.
+- All-device mean: ~5.49 mA — represents no real device accurately.
+
+**Output:** results/figures/05_mean_bar.png,
+05_distribution_grid.png, 05_mean_vs_distribution.png
