@@ -99,10 +99,10 @@ ON-state current scales monotonically with electrode width. Sharp yield cliff be
 
 | Electrode Width | Mean i_ON | Yield |
 |---|---|---|
-| 18 µm | 9.44 mA | ✅ Reliable |
-| 12 µm | 5.89 mA | ✅ Reliable |
-| 6 µm | 2.22 mA* | ⚠️ Marginal |
-| 2 µm | ~2.55 pA | ❌ Fail |
+| 18 µm | 9.44 mA | Reliable |
+| 12 µm | 5.89 mA | Reliable |
+| 6 µm | 2.22 mA* | Marginal |
+| 2 µm | ~2.55 pA | Fail |
 
 *6 µm mean is bimodal — misleading. FC4 yield = 92%, FC1 yield = 9%.
 
