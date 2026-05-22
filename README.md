@@ -45,7 +45,7 @@ This project answers three questions from real experimental data:
 
 ### 1 — Layer Count Does Not Predict Switching Performance
 
-![Layer Distribution](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/notebooks/fig_s1_layer_distribution.png)
+![Layer Distribution](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s1_layer_distribution.png)
 
 Boxplot of ON/OFF ratio across 6 layer groups (10–60 layers). No monotonic trend — Pearson r < 0.25, Random Forest R² = −0.09. Layer count alone is insufficient as a process control parameter for switching yield.
 
@@ -53,7 +53,7 @@ Boxplot of ON/OFF ratio across 6 layer groups (10–60 layers). No monotonic tre
 
 ### 2 — IV Curves: SET and RESET Detection
 
-![IV Curves](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/notebooks/fig_s2_iv_curves.png)
+![IV Curves](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s2_iv_curves.png)
 
 Log-scale IV curves for Run 33 (negative polarity, −12.8 V SET) and Run 35 (positive polarity, +19.4 V SET). Classic bipolar memristive hysteresis. ON/OFF ratio ~10⁷ in best devices.
 
@@ -61,7 +61,7 @@ Log-scale IV curves for Run 33 (negative polarity, −12.8 V SET) and Run 35 (po
 
 ### 3 — Correlation Audit: Noise Floor Artefact
 
-![Correlation Heatmap](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/notebooks/fig_s3_correlation.png)
+![Correlation Heatmap](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s3_correlation.png)
 
 Feature correlation matrix for `layer_sweep` data. Strong i_on ↔ on/off ratio correlation (r = 0.96) is an **instrument noise floor artefact**, not a physical relationship — OFF current is clamped at ~3.66×10⁻⁶ A by the measurement system.
 
@@ -99,10 +99,10 @@ ON-state current scales monotonically with electrode width. Sharp yield cliff be
 
 | Electrode Width | Mean i_ON | Yield |
 |---|---|---|
-| 18 µm | 9.44 mA | ✅ Reliable |
-| 12 µm | 5.89 mA | ✅ Reliable |
-| 6 µm | 2.22 mA* | ⚠️ Marginal |
-| 2 µm | ~2.55 pA | ❌ Fail |
+| 18 µm | 9.44 mA | Reliable |
+| 12 µm | 5.89 mA | Reliable |
+| 6 µm | 2.22 mA* | Marginal — high variability |
+| 2 µm | ~2.55 pA | Fail — leakage only |
 
 *6 µm mean is bimodal — misleading. FC4 yield = 92%, FC1 yield = 9%.
 
