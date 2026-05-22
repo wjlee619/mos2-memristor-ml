@@ -7,9 +7,9 @@
 
 ---
 
-## Pipeline Overview
+## Hero Figure: Bipolar IV Hysteresis
 
-![Pipeline](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/mos2_linkedin_pipeline.svg)
+![IV Hysteresis](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/00_iv_hysteresis_loops.png)
 
 ---
 
@@ -91,6 +91,27 @@ ON-state current under Dark vs Dark-ThenLight conditions. Mann-Whitney U: **p = 
 
 ---
 
+### 7 — Electrode Width: Process Window Analysis (Key Finding)
+
+![Electrode Width vs ON Current](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/04_electrode_width_ion.png)
+
+ON-state current scales monotonically with electrode width. Sharp yield cliff below 12 µm — minimum reliable electrode CD = **12 µm**.
+
+| Electrode Width | Mean i_ON | Yield |
+|---|---|---|
+| 18 µm | 9.44 mA | ✅ Reliable |
+| 12 µm | 5.89 mA | ✅ Reliable |
+| 6 µm | 2.22 mA* | ⚠️ Marginal |
+| 2 µm | ~2.55 pA | ❌ Fail |
+
+*6 µm mean is bimodal — misleading. FC4 yield = 92%, FC1 yield = 9%.
+
+![Spatial Map](https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/04_spatial_map.png)
+
+Spatial yield map across Chip#14. Column 4 devices switch reliably (92%); column 1 devices almost never switch (9%) — consistent with spray-coating thickness gradient across the substrate.
+
+---
+
 ## Signal Processing: SET/RESET Detection Algorithm
 
 Raw IV sweeps span ~10⁷ dynamic range (OFF: ~10⁻¹² A → ON: ~10⁻⁵ A). Standard dI/dV fails near the ON state due to noise saturation.
@@ -120,14 +141,21 @@ mos2-memristor-ml/
 ├── notebooks/
 │   ├── 01_eda.ipynb                  # Distributions, correlation audit, data quality
 │   ├── 02_random_forest.ipynb        # Layer count predictability (R² = −0.09)
-│   └── 03_stability_analysis.ipynb   # Electroforming trend, light condition test
+│   ├── 03_stability_analysis.ipynb   # Electroforming trend, light condition test
+│   ├── 04_electrode_width_analysis.ipynb  # CD process window, spatial yield map
+│   ├── 05_data_quality_audit.ipynb   # Distribution audit, mean vs spread
+│   └── 06_drilldown_analysis.ipynb   # T-code / position yield drilldown
 │
 ├── scripts/
 │   ├── process_layer_sweep.py        # Gate sweep feature extraction
-│   └── extract_memeffect_iv.py       # SET/RESET detection algorithm
+│   ├── extract_memeffect_iv.py       # SET/RESET detection algorithm
+│   └── parse_position_aug30.py       # Electrode width + position parsing
 │
 ├── results/figures/                  # All output figures
-├── docs/mos2_project_notes.md        # Analysis log and methodology notes
+├── docs/
+│   ├── device_physics_notes.md       # Device physics and mechanism notes
+│   ├── switching_variability_note.md # Technical note — process implications
+│   └── analysis_log.md              # Per-notebook analysis log
 └── requirements.txt
 ```
 
@@ -146,9 +174,10 @@ jupyter notebook notebooks/01_eda.ipynb
 
 ## Limitations
 
-- Single lab run — electrode geometry not systematically varied across all chips
+- Single lab run — electrode geometry not systematically varied across all chips in a controlled DOE
 - Noise floor at ~3.66×10⁻⁶ A limits OFF-state resolution for high-resistance devices
 - Electroforming analysis is single-chip (Chip#14); cross-chip generalisation requires further data
+- T-code fully confounded with column position in the 6 µm yield analysis — cannot separate channel vs spatial effects without follow-on experiment
 - Raw CSV files not included (institutional data — available on request)
 
 ---
