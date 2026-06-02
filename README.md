@@ -60,7 +60,7 @@ Four process-relevant findings are reported from real experimental data:
 
 ![Yield by geometry](results/figures/fig_07a_yield_by_geometry.png)
 
-Fitted resistance (R5) across 52 functional devices follows R ∝ W⁻¹·¹⁵ (Pearson r = −0.9999, log–log), confirming sheet resistance-dominated transport with an extracted R_sheet of approximately 1800–2000 Ω/□. Device yield decreases from 71–75% at wider geometries to 50% at 2 µm, consistent with contact formation failure on the chemically inert MoS₂ basal plane. Two failure modes are identified: dead open-circuit devices (16.2%) attributable to nucleation gaps, and anomalous high-resistance devices (13.5%) consistent with grain boundary barriers. 86.5% of functional devices achieve average fit quality above 0.999, validating the R5 extraction methodology.
+Fitted resistance (R5) across 52 functional devices follows R ∝ W⁻¹·¹⁵ (Pearson r = −0.9999, log–log), confirming sheet resistance-dominated transport with an extracted R_sheet of approximately 1800–2000 Ω/□. Device yield decreases from 71–75% at wider geometries to 50% at 2 µm, consistent with contact formation failure on the chemically inert MoS₂ basal plane. Two failure modes are identified: dead open-circuit devices (16.2%) attributable to nucleation gaps, and anomalous high-resistance devices (13.5%) consistent with grain boundary barriers. 86.5% of functional devices achieve average fit quality above 0.999, validating the R5 extraction methodology. IA3 (18 µm, R5 = 31 kΩ, CV = 318%) is excluded from annotation and discussed separately as a switching candidate.
 
 ---
 
