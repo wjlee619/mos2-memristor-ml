@@ -40,22 +40,21 @@ Electrode linewidth was varied by design across the chip: **2, 6, 12, and 18 µm
 
 ## Summary of Findings
 
-Three process-relevant questions were investigated using real experimental data:
+Four process-relevant findings are reported from real experimental data:
 
-**1. Does MoS₂ layer count predict switching performance?**
-No. Random Forest regression yields R² = −0.09 across 73 gate-sweep measurements. Layer count as measured by optical contrast is too coarse a metric to predict ON/OFF ratio in this system — local interface quality and defect density are the controlling variables.
+**1. MoS₂ layer count does not predict switching performance.** Random Forest regression yields R² = −0.09 across 73 gate-sweep measurements. Layer count as measured by optical contrast is too coarse a metric to predict ON/OFF ratio in this system — local interface quality and defect density are the controlling variables.
 
-**2. Is there systematic drift in device behaviour across repeated measurement cycles?**
-Yes. ON-state current increases monotonically with run number on Chip#14 (R² = 0.48, p < 0.001), consistent with progressive conductive filament widening — the electroforming signature. Devices in the Aug 2024 batch were permanently in the ON state by the measurement session, indicating over-electroforming.
+**2. Repeated measurement cycles produce systematic drift in device behaviour.** ON-state current increases monotonically with run number on Chip#14 (R² = 0.48, p < 0.001), consistent with progressive conductive filament widening — the electroforming signature. Devices in the Aug 2024 batch were permanently in the ON state by the measurement session, indicating over-electroforming prior to characterisation.
 
-**3. Does electrode geometry control switching yield?**
-Yes — this is the primary process-control finding. ON-state current scales monotonically with electrode width. Yield drops sharply below 12 µm: 6 µm devices show bimodal behaviour (FC4 yield 92%, FC1 yield 9%); 2 µm devices produce leakage current only with no switching events.
+**3. Electrode geometry is the primary process-control variable for switching yield.** ON-state current scales monotonically with electrode width. Yield drops sharply below 12 µm: 6 µm devices show bimodal behaviour (FC4 column yield 92%, FC1 column yield 9%); 2 µm devices produce leakage current only with no observable switching events.
+
+**4. Resistance scales with electrode width following a near-ideal sheet resistance law.** Fitted resistance across 52 functional devices follows R ∝ W⁻¹·¹⁵ (Pearson r = −0.9999, log–log), with an extracted sheet resistance of approximately 1800–2000 Ω/□ consistent across all geometry groups. Yield at 2 µm is 50% compared to 71–75% at wider geometries, with two physically distinct failure modes identified: open-circuit dead devices and anomalous high-resistance devices.
 
 ---
 
 ## Results
 
-### 0 — Resistance Scaling and Yield — Chip#1 (Notebook 07)
+### 1 — Resistance Scaling and Yield — Chip#1 (Notebook 07)
 
 ![R5 scaling log-log](results/figures/fig_07b_r5_scaling_loglog.png)
 
@@ -65,7 +64,7 @@ Fitted resistance (R5) across 52 functional devices follows R ∝ W⁻¹·¹⁵ 
 
 ---
 
-### 1 — Layer Count vs Switching Performance
+### 2 — Layer Count vs Switching Performance
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s1_layer_distribution.png" width="700"/>
@@ -75,7 +74,7 @@ ON/OFF ratio across 6 MoS₂ layer groups (10–60 layers). No monotonic trend o
 
 ---
 
-### 2 — Bipolar IV Hysteresis: SET and RESET
+### 3 — Bipolar IV Hysteresis: SET and RESET
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/00_iv_hysteresis_loops.png" width="700"/>
@@ -89,7 +88,7 @@ Log-scale IV curves for Run 33 (negative polarity, V_SET = −12.8 V) and Run 35
 
 ---
 
-### 3 — Feature Correlation Audit
+### 4 — Feature Correlation Audit
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s3_correlation.png" width="700"/>
@@ -99,7 +98,7 @@ Pearson correlation matrix for gate-sweep features. The strong i_ON ↔ ON/OFF r
 
 ---
 
-### 4 — Chip-Level ON-State Distribution
+### 5 — Chip-Level ON-State Distribution
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/03_chip_ion_boxplot.png" width="700"/>
@@ -109,7 +108,7 @@ ON-state current distribution by chip. Chip#14 and Chip#1 show stable mA-range O
 
 ---
 
-### 5 — Electroforming Trend
+### 6 — Electroforming Trend
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/03_run_ion_trend.png" width="700"/>
@@ -119,7 +118,7 @@ ON-state current vs measurement run number for Chip#14 (n = 85 sweeps). Statisti
 
 ---
 
-### 6 — Optical Illumination: No Effect on Stable ON State
+### 7 — Optical Illumination: No Effect on Stable ON State
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/03_lightcond_ion_boxplot.png" width="700"/>
@@ -129,7 +128,7 @@ ON-state current under Dark vs Dark-ThenLight measurement conditions. Mann-Whitn
 
 ---
 
-### 7 — Electrode Width: Process Window Analysis
+### 8 — Electrode Width: Process Window Analysis
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/04_electrode_width_ion.png" width="700"/>
@@ -185,34 +184,40 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 
 ## Analysis Pipeline
 
+<div align="center">
+
 ```
+Raw CSV files (Keithley 2634B measurements)
+          │
+          ▼
 ┌─────────────────────────────────────────┐
-│  Phase 1: Exploratory Data Analysis     │
-│  layer_sweep.csv → Notebook 01          │
-│  Feature distributions, correlation     │
+│  Phase 1: Gate Sweep Extraction         │
+│  73 files → layer_sweep.csv             │
+│  Features: i_on, i_off, ON/OFF ratio    │
 └─────────────────────────────────────────┘
-                     ↓
+          │
+          ▼
 ┌─────────────────────────────────────────┐
-│  Phase 2: Predictability Baseline       │
-│  layer_sweep.csv → Notebook 02          │
-│  Random Forest R² = −0.09 (n=73)        │
-│  Layer count not a viable predictor     │
+│  Phase 2: IV Sweep Extraction           │
+│  39 files → memeffect_sweep.csv         │
+│  Algorithm: d(log|I|)/dV for SET/RESET  │
 └─────────────────────────────────────────┘
-                     ↓
+          │
+          ▼
 ┌─────────────────────────────────────────┐
-│  Phase 3: Stability & Electroforming    │
-│  memeffect_sweep*.csv → Notebook 03     │
-│  R² = 0.48, p < 0.001 (n=85 sweeps)    │
-│  Progressive filament widening          │
+│  Phase 3a: EDA & Random Forest          │
+│  Layer count vs ON/OFF ratio            │
+│  Result: R² = −0.09 (not predictive)   │
 └─────────────────────────────────────────┘
-                     ↓
+          │
+          ▼
 ┌─────────────────────────────────────────┐
-│  Phase 3b: CD Process Window            │
-│  memeffect sweeps → Notebook 04         │
-│  Min reliable CD: 12 µm                 │
-│  Spatial yield gradient confirmed       │
+│  Phase 3b: Stability Analysis           │
+│  115 already_on samples, Chip#14        │
+│  Electroforming: R²=0.48, p<0.001      │
 └─────────────────────────────────────────┘
-                     ↓
+          │
+          ▼
 ┌─────────────────────────────────────────┐
 │  Phase 4: Resistance Scaling (Chip#1)   │
 │  processedTable.csv → Notebook 07       │
@@ -221,6 +226,8 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 │  Yield: 50% at 2µm vs 71–75% wider     │
 └─────────────────────────────────────────┘
 ```
+
+</div>
 
 ---
 
