@@ -1,5 +1,9 @@
 # MoS₂/Graphene Printed Memristor — Electrical Characterisation and Data Analysis
 
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Institution](https://img.shields.io/badge/Imperial_College_London-Torrisi_Lab-navy?style=flat-square)
+
 **Si/SiO₂/Au/Cr/MoS₂/Graphene vertical memristor stack · Keithley 2634B SMU · Imperial College London, Torrisi Lab (2DWeb Group) · 2023–2024**
 
 Won Jun Lee (이원준) · MRes Soft Electronics, Imperial College London · [github.com/wjlee619](https://github.com/wjlee619)
@@ -225,6 +229,8 @@ mos2-memristor-ml/
 │   └── analysis_log.md                      # Per-notebook analysis log
 └── requirements.txt
 ```
+
+The [`docs/device_physics_notes.md`](docs/device_physics_notes.md) file contains a detailed reference on device physics, switching mechanisms, and measurement methodology developed during the project.
 
 ---
 
