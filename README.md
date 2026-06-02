@@ -184,7 +184,9 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 
 ## Analysis Pipeline
 
-![Analysis Pipeline](results/figures/pipeline.png)
+<p align="center">
+  <img src="results/figures/pipeline.png" width="520" alt="Analysis Pipeline"/>
+</p>
 
 ---
 
