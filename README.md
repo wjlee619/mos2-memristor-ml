@@ -1,4 +1,4 @@
-# MoS₂/Graphene Memristor — Electrical Characterisation & Data Analysis
+# MoS₂/Graphene Printed Memristor — Electrical Characterisation and Data Analysis
 
 **Si/SiO₂/Au/Cr/MoS₂/Graphene vertical memristor stack · Keithley 2634B SMU · Imperial College London, Torrisi Lab (2DWeb Group) · 2023–2024**
 
@@ -54,6 +54,16 @@ Yes — this is the primary process-control finding. ON-state current scales mon
 ---
 
 ## Results
+
+### 0 — Resistance Scaling and Yield — Chip#1 (Notebook 07)
+
+![R5 scaling log-log](results/figures/fig_07b_r5_scaling_loglog.png)
+
+![Yield by geometry](results/figures/fig_07a_yield_by_geometry.png)
+
+Fitted resistance (R5) across 52 functional devices follows R ∝ W⁻¹·¹⁵ (Pearson r = −0.9999, log–log), confirming sheet resistance-dominated transport with an extracted R_sheet of approximately 1800–2000 Ω/□. Device yield decreases from 71–75% at wider geometries to 50% at 2 µm, consistent with contact formation failure on the chemically inert MoS₂ basal plane. Two failure modes are identified: dead open-circuit devices (16.2%) attributable to nucleation gaps, and anomalous high-resistance devices (13.5%) consistent with grain boundary barriers. 86.5% of functional devices achieve average fit quality above 0.999, validating the R5 extraction methodology.
+
+---
 
 ### 1 — Layer Count vs Switching Performance
 
@@ -173,6 +183,47 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 
 ---
 
+## Analysis Pipeline
+
+```
+┌─────────────────────────────────────────┐
+│  Phase 1: Exploratory Data Analysis     │
+│  layer_sweep.csv → Notebook 01          │
+│  Feature distributions, correlation     │
+└─────────────────────────────────────────┘
+                     ↓
+┌─────────────────────────────────────────┐
+│  Phase 2: Predictability Baseline       │
+│  layer_sweep.csv → Notebook 02          │
+│  Random Forest R² = −0.09 (n=73)        │
+│  Layer count not a viable predictor     │
+└─────────────────────────────────────────┘
+                     ↓
+┌─────────────────────────────────────────┐
+│  Phase 3: Stability & Electroforming    │
+│  memeffect_sweep*.csv → Notebook 03     │
+│  R² = 0.48, p < 0.001 (n=85 sweeps)    │
+│  Progressive filament widening          │
+└─────────────────────────────────────────┘
+                     ↓
+┌─────────────────────────────────────────┐
+│  Phase 3b: CD Process Window            │
+│  memeffect sweeps → Notebook 04         │
+│  Min reliable CD: 12 µm                 │
+│  Spatial yield gradient confirmed       │
+└─────────────────────────────────────────┘
+                     ↓
+┌─────────────────────────────────────────┐
+│  Phase 4: Resistance Scaling (Chip#1)   │
+│  processedTable.csv → Notebook 07       │
+│  R ∝ W⁻¹·¹⁵ (r=−0.9999, n=52)         │
+│  R_sheet ~1800–2000 Ω/□                 │
+│  Yield: 50% at 2µm vs 71–75% wider     │
+└─────────────────────────────────────────┘
+```
+
+---
+
 ## Repository Structure
 
 ```
@@ -182,9 +233,10 @@ mos2-memristor-ml/
 │   │   ├── layer_sweep.csv                   # Gate sweep features (73 files)
 │   │   ├── memeffect_sweep.csv               # IV sweep SET/RESET features (39 files)
 │   │   └── memeffect_sweep_aug30.csv         # Aug 2024 batch (85 files)
-│   └── derived/
-│       ├── memeffect_sweep_aug30_parsed.csv  # Electrode width + position parsed
-│       └── df6_enriched.csv                  # 6 µm device yield drilldown
+│   ├── derived/
+│   │   ├── memeffect_sweep_aug30_parsed.csv  # Electrode width + position parsed
+│   │   └── df6_enriched.csv                  # 6 µm device yield drilldown
+│   └── processedTable.csv                    # Chip#1 R5 resistance metrics (74 devices)
 │
 ├── notebooks/
 │   ├── 01_eda.ipynb                          # Feature distributions, correlation audit
@@ -192,7 +244,8 @@ mos2-memristor-ml/
 │   ├── 03_stability_analysis.ipynb           # Electroforming trend, light condition test
 │   ├── 04_electrode_width_analysis.ipynb     # CD process window, spatial yield map
 │   ├── 05_data_quality_audit.ipynb           # Distribution audit, mean vs spread
-│   └── 06_drilldown_analysis.ipynb           # T-code / position yield drilldown
+│   ├── 06_drilldown_analysis.ipynb           # T-code / position yield drilldown
+│   └── 07_chip1_resistance_scaling.ipynb     # Chip#1 resistance scaling — R ∝ W⁻¹·¹⁵, yield by geometry, sheet resistance extraction
 │
 ├── scripts/
 │   ├── extract_memeffect_iv.py               # Core IV feature extractor
