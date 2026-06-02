@@ -184,50 +184,7 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 
 ## Analysis Pipeline
 
-<div align="center">
-
-```
-Raw CSV files (Keithley 2634B measurements)
-          │
-          ▼
-┌─────────────────────────────────────────┐
-│  Phase 1: Gate Sweep Extraction         │
-│  73 files → layer_sweep.csv             │
-│  Features: i_on, i_off, ON/OFF ratio    │
-└─────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────┐
-│  Phase 2: IV Sweep Extraction           │
-│  39 files → memeffect_sweep.csv         │
-│  Algorithm: d(log|I|)/dV for SET/RESET  │
-└─────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────┐
-│  Phase 3a: EDA & Random Forest          │
-│  Layer count vs ON/OFF ratio            │
-│  Result: R² = −0.09 (not predictive)   │
-└─────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────┐
-│  Phase 3b: Stability Analysis           │
-│  115 already_on samples, Chip#14        │
-│  Electroforming: R²=0.48, p<0.001      │
-└─────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────┐
-│  Phase 4: Resistance Scaling (Chip#1)   │
-│  processedTable.csv → Notebook 07       │
-│  R ∝ W⁻¹·¹⁵ (r=−0.9999, n=52)         │
-│  R_sheet ~1800–2000 Ω/□                 │
-│  Yield: 50% at 2µm vs 71–75% wider     │
-└─────────────────────────────────────────┘
-```
-
-</div>
+![Analysis Pipeline](results/figures/pipeline.png)
 
 ---
 
