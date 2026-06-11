@@ -221,8 +221,8 @@ corr = layer[numeric_cols].corr()
 # nicer labels
 label_map = {
     "layers": "Layers", "id_on_A": "I_ON (A)", "id_off_A": "I_OFF (A)",
-    "on_off_ratio": "ON/OFF ratio", "vgs_min_V": "V_GS min",
-    "vgs_max_V": "V_GS max", "n_points": "n_points"
+    "on_off_ratio": "ON/OFF ratio", "vgs_min_V": "V_min (V)",
+    "vgs_max_V": "V_max (V)", "n_points": "n_points"
 }
 corr.index   = [label_map.get(c, c) for c in corr.index]
 corr.columns = [label_map.get(c, c) for c in corr.columns]

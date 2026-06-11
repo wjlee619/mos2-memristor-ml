@@ -15,9 +15,9 @@ Won Jun Lee (이원준) · MRes Soft Electronics, Imperial College London · [gi
 The device is a solution-processed bipolar memristor fabricated on a Si/SiO₂ substrate. The layer stack from bottom to top:
 
 - **Si/SiO₂** — substrate and electrical isolation layer
-- **Au/Cr** — bottom electrodes, inkjet-printed in a four-contact cross geometry (Au for low-resistance ohmic contact; Cr adhesion layer)
+- **Au/Cr** — bottom electrodes, evaporated Cr/Au, photolithographically patterned in a four-contact cross geometry (Au for low-resistance ohmic contact; Cr adhesion layer)
 - **MoS₂** — switching layer, spray-coated from solution over the bottom electrodes using an automated spray coater
-- **Graphene** — top electrode, wet-transferred over the MoS₂ switching layer
+- **Graphene** — top electrode, CVD-grown graphene, wet-transferred over the MoS₂ switching layer
 
 Electrode linewidth was varied by design across the chip: **2, 6, 12, and 18 µm** (encoded as position codes A–D in measurement filenames). All electrical measurements were performed on a Keithley 2634B dual-channel SourceMeter in dual-sweep IV mode (4,000 points per sweep).
 
@@ -35,7 +35,7 @@ Electrode linewidth was varied by design across the chip: **2, 6, 12, and 18 µm
 | Layer stack | Si/SiO₂ / Au/Cr / MoS₂ (spray-coated) / Graphene (wet transfer) |
 | Measurement instrument | Keithley 2634B SourceMeter |
 | Total IV sweeps processed | 577 raw CSV files |
-| ON/OFF ratio (best devices) | ~10⁷ |
+| ON/OFF ratio (best devices) | ~10⁷ (lower bound; OFF current near the slow-mode noise floor) |
 | SET voltage range | −12.8 V to +19.4 V |
 | Electroforming trend | R² = 0.48, p < 0.001 (Chip#14, n = 85 sweeps) |
 | Minimum reliable electrode CD | 12 µm |
@@ -46,9 +46,9 @@ Electrode linewidth was varied by design across the chip: **2, 6, 12, and 18 µm
 
 Four process-relevant findings are reported from real experimental data:
 
-**1. MoS₂ layer count does not predict switching performance.** Random Forest regression yields R² = −0.09 across 73 gate-sweep measurements. Layer count as measured by optical contrast is too coarse a metric to predict ON/OFF ratio in this system — local interface quality and defect density are the controlling variables.
+**1. MoS₂ layer count does not predict low-bias conduction.** Random Forest regression yields R² = −0.09 across 73 ±10 V sub-threshold sweep measurements. These sweeps stay below the SET threshold (12–19 V), so devices do not switch; the ON/OFF values here (~10⁰⁻¹) are sub-threshold conduction ratios, distinct from the ~10⁷ switching ratios from ±20 V sweeps. Layer count as measured by optical contrast is too coarse a metric to predict sub-threshold conduction in this system — local interface quality and defect density are the controlling variables.
 
-**2. Repeated measurement cycles produce systematic drift in device behaviour.** ON-state current increases monotonically with run number on Chip#14 (R² = 0.48, p < 0.001), consistent with progressive conductive filament widening — the electroforming signature. Devices in the Aug 2024 batch were permanently in the ON state by the measurement session, indicating over-electroforming prior to characterisation.
+**2. Repeated measurement cycles produce systematic drift in device behaviour.** ON-state current increases monotonically with run number on Chip#14 (R² = 0.48, p < 0.001; runs are repeated measures on the same devices), consistent with progressive conductive filament widening — the electroforming signature. Devices in the Aug 2024 batch were permanently in the ON state by the measurement session, indicating over-electroforming prior to characterisation. (single chip — Chip#14)
 
 **3. Electrode geometry is the primary process-control variable for switching yield.** ON-state current scales monotonically with electrode width. Yield drops sharply below 12 µm: 6 µm devices show bimodal behaviour (FC4 column yield 92%, FC1 column yield 9%); 2 µm devices produce leakage current only with no observable switching events.
 
@@ -68,13 +68,13 @@ Fitted resistance (R5) across 52 functional devices follows R ∝ W⁻¹·¹⁵ 
 
 ---
 
-### 2 — Layer Count vs Switching Performance
+### 2 — Layer Count vs Low-Bias Conduction
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s1_layer_distribution.png" width="700"/>
 </p>
 
-ON/OFF ratio across 6 MoS₂ layer groups (10–60 layers). No monotonic trend observed — Pearson r < 0.25, Random Forest R² = −0.09. Layer count is not a viable process control parameter for switching yield in this material system.
+Low-bias ON/OFF conduction ratio across 6 MoS₂ layer groups (10–60 layers) from 73 ±10 V sub-threshold sweeps. No monotonic trend observed — Pearson r < 0.25, Random Forest R² = −0.09. These sweeps remain below the SET threshold and do not probe switching; the ~10⁰⁻¹ ON/OFF values here are sub-threshold conduction ratios, distinct from the ~10⁷ switching ratios from ±20 V sweeps. Layer count is not a viable process control parameter for sub-threshold conduction in this material system.
 
 ---
 
@@ -98,7 +98,7 @@ Log-scale IV curves for Run 33 (negative polarity, V_SET = −12.8 V) and Run 35
   <img src="https://raw.githubusercontent.com/wjlee619/mos2-memristor-ml/main/results/figures/fig_s3_correlation.png" width="700"/>
 </p>
 
-Pearson correlation matrix for gate-sweep features. The strong i_ON ↔ ON/OFF ratio correlation (r = 0.96) is an instrument noise floor artefact: OFF-state current is clamped at ~3.66×10⁻⁶ A by the Keithley measurement floor, compressing the denominator of the ON/OFF ratio. This correlation is not a physical device property.
+Pearson correlation matrix for layer_sweep (±10 V sub-threshold sweep) features. The strong I_ON ↔ ON/OFF ratio correlation (r = 0.96) is an instrument noise floor artefact: OFF-state current is clamped at ~3.66×10⁻⁶ A by the Keithley fast-sweep measurement floor, compressing the denominator of the ON/OFF ratio. This correlation is not a physical device property.
 
 ---
 
@@ -200,7 +200,7 @@ Operating in log-space compresses the 10⁷ dynamic range into 7 log-decades, ma
 mos2-memristor-ml/
 ├── data/
 │   ├── processed/
-│   │   ├── layer_sweep.csv                   # Gate sweep features (73 files)
+│   │   ├── layer_sweep.csv                   # ±10 V sub-threshold sweep features (73 files)
 │   │   ├── memeffect_sweep.csv               # IV sweep SET/RESET features (39 files)
 │   │   └── memeffect_sweep_aug30.csv         # Aug 2024 batch (85 files)
 │   ├── derived/
@@ -219,7 +219,7 @@ mos2-memristor-ml/
 │
 ├── scripts/
 │   ├── extract_memeffect_iv.py               # Core IV feature extractor
-│   ├── process_layer_sweep.py                # Gate sweep feature extraction
+│   ├── process_layer_sweep.py                # Sub-threshold sweep feature extraction
 │   └── parse_position_aug30.py              # Electrode width + position parsing
 │
 ├── results/figures/                          # All output figures
@@ -248,7 +248,7 @@ jupyter notebook notebooks/01_eda.ipynb
 ## Scope and Constraints
 
 - Dataset covers a single fabrication run; a controlled DOE varying electrode geometry, MoS₂ deposition passes, and measurement sequence independently was not performed
-- Instrument noise floor (~3.66×10⁻⁶ A) limits OFF-state resolution; ON/OFF ratios for low-current devices are partially instrument-limited
+- Instrument noise floor is mode-specific: ~3.66×10⁻⁶ A in the fast ±10 V sweep mode (layer_sweep dataset); ~pA in the slow IV sweep mode (memeffect_sweep dataset). OFF-state resolution and ON/OFF ratios for low-current devices are partially instrument-limited in each respective mode
 - Only two switching events were captured from the OFF state (Chip#1, Runs 33 and 35); V_SET distribution statistics require a larger cycling dataset
 - Column position and T-code (measurement channel) are confounded in the 6 µm yield analysis — a follow-on experiment measuring T12 and T24 at both FC1 and FC4 positions is required to separate spatial from channel effects
 - Raw IV trace files are not included (institutional data; available on request)

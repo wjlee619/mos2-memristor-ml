@@ -9,9 +9,9 @@ The device is a printed MoS₂/Graphene bipolar memristor fabricated on a SiO₂
 
 **Layer stack (bottom to top):**
 - **Substrate:** SiO₂ (thermally grown on Si, provides electrical isolation)
-- **Bottom electrode:** Au/Cr inkjet-printed. Four contacts per device arranged in a cross geometry, numbered 1–4 clockwise from top. The Au provides low-resistance ohmic contact; Cr is the adhesion layer. Inkjet printing introduces some edge roughness at contact corners — relevant for field concentration.
+- **Bottom electrode:** Au/Cr, deposited by evaporation and photolithographically patterned. Four contacts per device arranged in a cross geometry, numbered 1–4 clockwise from top. The Au provides low-resistance ohmic contact; Cr is the adhesion layer.
 - **Switching layer:** MoS₂ ink spray-coated over the bottom electrodes. The MoS₂ is solution-processed, which means it contains a mixture of single- and few-layer flakes with a disordered grain boundary network, residual solvent, and a non-uniform distribution of sulfur vacancies. Same nominal layer count across all Chip#14 devices (same spray pass), but local thickness varies due to spray pattern geometry (see Section 7).
-- **Top electrode:** Graphene (likely CVD-transferred or also printed). Provides the counter-electrode for current injection into the MoS₂.
+- **Top electrode:** CVD-grown graphene, wet-transferred. Provides the counter-electrode for current injection into the MoS₂.
 
 **Measurement instrument:** Keithley 2634B dual-channel SMU. Dual-sweep mode enabled — each measurement file contains a full out-and-back voltage sweep in a single CSV. Header is ~62 rows of instrument metadata; data begins at the `"Index"` row. The last 5 rows of each file are summary statistics (Min, Max, Mean, StdDev, CV) — these must be dropped before analysis.
 
@@ -125,7 +125,7 @@ The filament nucleation site is **asymmetrically located** between contacts 1 an
 This asymmetry is a **fabrication fingerprint**. In a printed device, the ink deposition is never perfectly symmetric about the channel midpoint:
 - MoS₂ flake orientation and stacking varies across the channel
 - The spray-coating trajectory deposits more material in one half of the channel depending on the nozzle sweep direction
-- Au/Cr contact morphology may differ slightly between contacts 1 and 4 due to inkjet print head orientation
+- Au/Cr contact morphology may differ slightly between contacts 1 and 4 due to non-uniformity in the evaporation or photolithographic patterning
 
 These asymmetries create a **preferred polarity for filament growth**: lower V_SET under the polarity that aligns the field with the dominant V_S drift direction.
 
