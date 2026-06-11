@@ -27,7 +27,7 @@ def code(src):
 cells.append(md(
     "# Phase 3 — Random Forest ML\n\n"
     "**Target:** `on_off_ratio` 예측  \n"
-    "**Data:** `layer_sweep.csv` (73개 트랜지스터 측정값)  \n"
+    "**Data:** `layer_sweep.csv` (73개 2단자 서브-임계(±10 V) 측정값)  \n"
     "**Model:** Random Forest (n_estimators=500)"
 ))
 

@@ -1,4 +1,4 @@
-# Switching Variability in Inkjet-Printed MoS₂/Graphene Memristors: Process Implications for 2D Device Integration
+# Switching Variability in MoS₂/Graphene Bipolar Memristors: Process Implications for 2D Device Integration
 
 **Won Jun Lee (이원준)**  
 MRes Soft Electronics, Imperial College London (2DWeb Group, Torrisi Lab)  
@@ -8,13 +8,13 @@ MRes Soft Electronics, Imperial College London (2DWeb Group, Torrisi Lab)
 
 ## Abstract
 
-Resistive switching variability is the central reliability challenge for emerging non-volatile memory based on 2D transition metal dichalcogenides (TMDs). This note summarises electrical characterisation of inkjet-printed MoS₂/Graphene bipolar memristors (n = 577 IV sweeps), identifying three independent sources of switching variability: stochastic filament nucleation, progressive electroforming, and electrode geometry. The findings have direct implications for process integration of 2D materials at scaled nodes, where variability in SET voltage, ON/OFF ratio, and retention directly determine memory window yield.
+Resistive switching variability is the central reliability challenge for emerging non-volatile memory based on 2D transition metal dichalcogenides (TMDs). This note summarises electrical characterisation of MoS₂/Graphene bipolar memristors (n = 577 IV sweeps), identifying three independent sources of switching variability: stochastic filament nucleation, progressive electroforming, and electrode geometry. The findings have direct implications for process integration of 2D materials at scaled nodes, where variability in SET voltage, ON/OFF ratio, and retention directly determine memory window yield.
 
 ---
 
 ## 1. Device Architecture and Measurement Method
 
-Devices consist of inkjet-printed MoS₂ and Graphene layers on SiO₂/Si substrates, contacted by printed graphene electrodes. All electrical measurements were performed on a Keithley 2634B SourceMeter in dual-sweep IV mode (4000 points per sweep, current compliance 10–100 mA).
+Devices are fabricated on SiO₂/Si substrates with bottom electrodes of evaporated Cr/Au, photolithographically patterned in a four-contact cross geometry; a spray-coated MoS₂ switching layer; and a CVD-grown graphene top electrode applied by wet transfer. All electrical measurements were performed on a Keithley 2634B SourceMeter in dual-sweep IV mode (4000 points per sweep, current compliance 10–100 mA).
 
 The switching layer is MoS₂ — a semiconducting TMD with bandgap ~1.8 eV (monolayer) to ~1.2 eV (bulk). Resistive switching in this system is filamentary: conductive paths form and rupture within the MoS₂ under applied electric field, driven by ion migration and local Joule heating.
 
@@ -81,7 +81,7 @@ Electrode width was extracted from device position codes encoded in measurement 
 
 The complete failure at 2 µm is consistent with a **critical dimension (CD) threshold** for filament formation: below a minimum electrode area, the current density required to nucleate a filament cannot be sustained without exceeding the compliance limit or causing device destruction.
 
-**Spatial mapping** of the Aug 2024 chip shows a non-uniform distribution of switching outcomes across the substrate, consistent with inkjet deposition thickness gradients — a spray-coating non-uniformity effect. Devices at substrate edges show systematically lower ON/OFF ratios than centre devices.
+**Spatial mapping** of the Aug 2024 chip shows a non-uniform distribution of switching outcomes across the substrate, consistent with MoS₂ spray-coating thickness gradients across the substrate. Devices at substrate edges show systematically lower ON/OFF ratios than centre devices.
 
 **Metrology implication:** This is a direct demonstration that optical or AFM measurement of electrode CD predicts switching yield — a finding directly relevant to in-line metrology at the lithography step. The 2 µm failure threshold defines the process window lower bound for this material system.
 
@@ -94,7 +94,7 @@ This dataset is a research characterisation dataset, not a process qualification
 - **Single lab run** — electrode geometry not systematically varied across all chips in a controlled DOE
 - **Noise floor** at ~3.66×10⁻⁶ A limits OFF-state resolution; reported ON/OFF ratios for low-current devices are instrument-limited, not physical
 - **Electroforming analysis** is single-chip (Chip#14); cross-chip generalisation requires further data
-- **Layer count** (10–60 layers, gate sweep data) shows no predictive power for ON/OFF ratio (Random Forest R² = −0.09) — layer count as measured by optical contrast is too coarse a metric for this system
+- **Layer count** (10–60 layers, ±10 V sub-threshold two-terminal sweep data) shows no predictive power for low-bias conduction ratio (Random Forest R² = −0.09) — these sweeps stay below the SET threshold and do not probe switching; layer count is too coarse a metric to predict sub-threshold conduction in this system
 - **Raw IV traces** not included due to institutional data restrictions; processed features available in `data/processed/`
 
 ---
